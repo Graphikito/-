@@ -1,23 +1,3 @@
-/**
- * script.js - Documentation et configuration
- *
- * Contrat succinct :
- * - Inputs : les éléments DOM suivants (classes/ids) sont utilisés :
- *     .nav-links a  -> liens de navigation
- *     .hero-image-box, .portfolio-image -> éléments cliquables/animés
- *     section[id] -> sections pour nav active
- *     .gallery-section, .gallery-wrapper -> (sur la page portfolio)
- * - Outputs : animations (CSS inline), scroll fluide, effets visuels.
- * - Erreurs possibles : si un sélecteur n'existe pas, le code ignore silencieusement
- *   l'élément (par ex. `document.querySelector` retourne null).
- *
- * Options de configuration (modifiez ici pour personnaliser):
- * - observerOptions.threshold : pour ajuster quand déclencher les animations
- * - transition durations / delays : recherchez `0.8s` ou `${index * 0.2}s`
- * - setInterval(createFloatingParticle, 2000) : changer la fréquence des particules
- *
- * Pour désactiver un effet : commentez la ligne concernée (ex: setInterval(...)).
- */
 
 // Smooth scrolling pour les liens de navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -93,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Effet parallaxe sophistiqué sur le hero
 let ticking = false;
 window.addEventListener('scroll', () => {
     if (!ticking) {
@@ -193,7 +172,6 @@ const updateActiveLink = () => {
 window.addEventListener('scroll', updateActiveLink);
 updateActiveLink();
 
-// Effet de particules subtiles (optionnel)
 const createFloatingParticle = () => {
     const heroSection = document.querySelector('.hero-section');
     if (!heroSection) return;
@@ -232,15 +210,11 @@ particleStyle.textContent = `
 `;
 document.head.appendChild(particleStyle);
 
-// Créer des particules toutes les 2 secondes
 setInterval(createFloatingParticle, 2000);
 
-// Fonction pour faire défiler les galeries (page portfolio.html)
-// Carrousel infini : implémentation par galerie
-// Utilise le clonage du premier et dernier élément pour créer une boucle
-const galleries = {}; // stocke l'état de chaque galerie
 
-// Map pour stocker les états des galeries
+const galleries = {}; 
+
 const galleryStates = new Map();
 
 function initGalleryInfinite(wrapper) {
@@ -251,16 +225,10 @@ function initGalleryInfinite(wrapper) {
     const items = Array.from(track.querySelectorAll('.gallery-item'));
     if (items.length === 0) return;
 
-    // Dupliquer les éléments pour créer l'effet infini
-    const clonedItems = items.map(item => item.cloneNode(true));
-    clonedItems.forEach(item => track.appendChild(item));
-
-    // Calculer les dimensions
     const itemWidth = items[0].offsetWidth;
     const gap = parseFloat(getComputedStyle(track).gap || '32');
-    const visibleCount = 4; // nombre d'images visibles à la fois
-    
-    // État initial
+    const visibleCount = 4; 
+
     const galleryState = {
         track,
         items: Array.from(track.children), // inclut les originaux + clones
@@ -285,8 +253,6 @@ function initGalleryInfinite(wrapper) {
         track.insertBefore(backClone, track.firstChild);
     }
 
-    // Ré-obtenir la liste d'items (avec clones)
-    const allItems = Array.from(track.querySelectorAll('.gallery-item'));
 
     // State pour la galerie
     const state = {
@@ -300,7 +266,6 @@ function initGalleryInfinite(wrapper) {
         clonesCount
     };
 
-    // Fonction pour recalculer tailles et position initiale
     function recalc() {
         // width de l'item (on suppose items homogènes)
         const itemWidth = allItems[0].offsetWidth;
@@ -451,55 +416,42 @@ function scrollGallery(galleryId, direction) {
     const state = galleryStates.get(galleryId);
     if (!state || state.animating) return;
 
-    state.animating = true;
-    
-    // Calculer le nouvel index
     let newIndex = state.currentIndex + direction;
-    
-    // Gérer le défilement infini
-    if (newIndex >= state.totalItems) {
-        // On atteint la fin, on va utiliser les clones
-        state.track.addEventListener('transitionend', function resetToStart() {
-            state.track.removeEventListener('transitionend', resetToStart);
-            state.track.classList.add('no-transition');
-            state.currentIndex = 0;
-            updateGalleryPosition(state, true);
-            // Force le navigateur à appliquer le changement
-            state.track.offsetHeight;
-            state.track.classList.remove('no-transition');
-            state.animating = false;
-        });
+
+    // SCÉNARIO : RETOUR AU DÉBUT (Marche arrière rapide)
+    if (newIndex == 4) {
+        state.animating = true;
         
-        // Continuer l'animation vers le clone suivant
-        state.currentIndex = newIndex;
-        updateGalleryPosition(state);
-    } else if (newIndex < 0) {
-        // Même logique pour le défilement vers la gauche
-        newIndex = state.totalItems - 1;
-        state.track.addEventListener('transitionend', function resetToEnd() {
-            state.track.removeEventListener('transitionend', resetToEnd);
-            state.track.classList.add('no-transition');
-            state.currentIndex = newIndex;
-            updateGalleryPosition(state, true);
-            state.track.offsetHeight;
-            state.track.classList.remove('no-transition');
-            state.animating = false;
-        });
+        // 1. On change la transition pour qu'elle soit plus rapide et différente
+        state.track.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)'; 
         
-        state.currentIndex = -1;
+        // 2. On revient à l'index 0
+        state.currentIndex = 0;
         updateGalleryPosition(state);
-    } else {
-        // Défilement normal
+
+        // 3. Une fois le "rembobinage" fini, on remet la transition normale
+        state.track.addEventListener('transitionend', function resetSpeed() {
+            state.track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            state.animating = false;
+            state.track.removeEventListener('transitionend', resetSpeed);
+        }, { once: true });
+
+    } 
+    else if (newIndex < 0) {
+        state.currentIndex = 3;
+        updateGalleryPosition(state);
+    } 
+    // SCÉNARIO : DÉPLACEMENT NORMAL
+    else {
+        state.animating = true;
         state.currentIndex = newIndex;
         updateGalleryPosition(state);
         
-        const handleNormalTransition = () => {
-            state.track.removeEventListener('transitionend', handleNormalTransition);
+        state.track.addEventListener('transitionend', () => {
             state.animating = false;
-        };
-        state.track.addEventListener('transitionend', handleNormalTransition);
+        }, { once: true });
     }
-}
+}   
 
 // Initialisation des galeries au chargement
 document.addEventListener('DOMContentLoaded', () => {

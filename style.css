@@ -168,6 +168,14 @@ body {
     overflow: hidden;
 }
 
+.hero-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
+}
+
 .hero-image-box::before {
     content: '';
     position: absolute;
@@ -175,6 +183,7 @@ body {
     background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(184, 138, 92, 0.1) 100%);
     opacity: 0;
     transition: opacity 0.4s;
+    z-index: 1;
 }
 
 .hero-image-box:hover {
@@ -263,6 +272,14 @@ body {
     overflow: hidden;
 }
 
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
+}
+
 .portfolio-image::after {
     content: '';
     position: absolute;
@@ -270,6 +287,7 @@ body {
     background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(184, 138, 92, 0.2) 100%);
     opacity: 0;
     transition: opacity 0.4s;
+    z-index: 1;
 }
 
 .portfolio-image:hover {
@@ -458,7 +476,6 @@ body {
 .gallery-item {
     width: calc((100vw - 12rem) / 4);
     max-width: 350px;
-    flex: 0 0 auto;
     aspect-ratio: 3/4;
     border-radius: 8px;
     background: linear-gradient(135deg, #f5f0eb 0%, #ebe4dd 100%);

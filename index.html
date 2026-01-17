@@ -1,59 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!--
-    GUIDE RAPIDE - index.html
 
-    Objectif : page d'accueil / portfolio minimaliste pour un·e graphiste.
-
-    Contrat (qu'est-ce que ce fichier fait) :
-    - Entrées : aucun paramètre requis. Les images et contenus sont directement
-        intégrés dans le HTML ou référencés via des balises <img> / CSS.
-    - Sorties : structure DOM avec des sections nommées (IDs) que le CSS et JS
-        stylisent et animent.
-    - Erreurs attendues : si vous remplacez un placeholder par une image dont
-        le chemin est incorrect, l'image ne s'affichera pas ; vérifiez le chemin
-        et l'attribut `alt` pour l'accessibilité.
-
-    Où modifier :
-    - Texte (titres, descriptions) : dans ce fichier `index.html`.
-    - Apparence (couleurs, typographie, responsive) : dans `style.css`.
-    - Comportement interactif (animations, scroll, effets) : dans `script.js`.
-
-    Raccourcis pour débutants :
-    - Pour voir vos modifications rapidement, ouvrez un terminal dans le dossier
-        du projet et lancez :
-            python3 -m http.server 8000
-        puis allez sur http://localhost:8000
-
-    Bonnes pratiques :
-    - Toujours ajouter l'attribut `alt` sur les images (<img alt="...">).
-    - Testez vos changements sur mobile et bureau.
-    - Si vous supprimez une section, adaptez les liens de navigation correspondants.
--->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graphiste - Portfolio</title>
+    <title>Graphikito - Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">Graphiste</div>
+        <div class="logo"><a href="index.html">Graphikito</a></div>
         <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="prestation.html">Prestation</a></li>
+            <li><a href="a_propos.html">À Propos</a></li>
         </ul>
     </nav>
 
     <!-- Section Hero: L'art d'Immortaliser -->
     <section id="hero" class="hero-section">
-        <h1 class="hero-title">L'art d'Immortaliser</h1>
+        <h1 class="hero-title">L'art d'Immortaliser'</h1>
         <div class="hero-gallery">
-            <div class="hero-image-box"></div>
-            <div class="hero-image-box"></div>
-            <div class="hero-image-box"></div>
+            <div class="hero-image-box"><img src="./assets/mario.png" alt="Mario">
+                <img src="photos/image1.jpg" alt="Description de l'image 1">
+            </div>
+            <div class="hero-image-box">
+                <img src="photos/image2.jpg" alt="Description de l'image 2">
+            </div>
+            <div class="hero-image-box">
+                <img src="photos/image3.jpg" alt="Description de l'image 3">
+            </div>
         </div>
     </section>
 
@@ -66,21 +43,27 @@
             <div class="portfolio-item">
                 <h3>Mariage</h3>
                 <p class="portfolio-description">Célébrons l'amour et Figer l'émotion</p>
-                <div class="portfolio-image"></div>
+                <div class="portfolio-image">
+                    <img src="photos/mariage.jpg" alt="Photographie de mariage">
+                </div>
             </div>
 
             <!-- Sport -->
             <div class="portfolio-item">
                 <h3>Sport</h3>
                 <p class="portfolio-description">Atrreter le temps pour admirer l'action</p>
-                <div class="portfolio-image"></div>
+                <div class="portfolio-image">
+                    <img src="photos/sport.jpg" alt="Photographie de sport">
+                </div>
             </div>
 
             <!-- Portrait -->
             <div class="portfolio-item">
                 <h3>Portrait</h3>
                 <p class="portfolio-description">Un shooting personnalisé</p>
-                <div class="portfolio-image"></div>
+                <div class="portfolio-image">
+                    <img src="photos/portrait.jpg" alt="Portrait photographique">
+                </div>
             </div>
         </div>
     </section>
@@ -93,7 +76,7 @@
             <!-- Email -->
             <div class="contact-item">
                 <p class="contact-label">Par mail</p>
-                <a href="mailto:graphiste@icloud.com" class="contact-link">graphiste@icloud.com</a>
+                <a href="mailto:Graphikito@icloud.com" class="contact-link">Graphikito_@icloud.com</a>
             </div>
 
             <!-- Photo centrale -->
@@ -102,14 +85,14 @@
             <!-- Instagram -->
             <div class="contact-item">
                 <p class="contact-label">Instagram</p>
-                <a href="https://instagram.com/Graphiste" target="_blank" class="contact-link instagram-link">@Graphiste</a>
+                <a href="https://instagram.com/Graphikito_/" target="_blank" class="contact-link instagram-link">@Graphikito_</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Graphiste - Tous droits réservés</p>
+        <p>&copy; 2025 Graphikito_ - Tous droits réservés</p>
     </footer>
 
     <script src="script.js"></script>
