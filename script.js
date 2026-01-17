@@ -53,12 +53,13 @@ function initGallery(wrapper) {
 // --- LOGIQUE DE DEFILEMENT ---
 function scrollGallery(galleryId, direction) {
     const state = galleryStates.get(galleryId);
+    const maxIndex = state.totalItems - 1;
     if (!state || state.animating) return;
 
     let newIndex = state.currentIndex + direction;
 
     // Gestion des limites (Boucle)
-    if (newIndex >= 4) {
+    if (newIndex >= maxIndex-1) {
         state.animating = true;
         state.track.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
         state.currentIndex = 0;
@@ -72,7 +73,7 @@ function scrollGallery(galleryId, direction) {
     } 
     
     if (newIndex < 0) {
-        newIndex = 3;
+        newIndex = maxIndex-2;
     }
 
     state.animating = true;
@@ -94,7 +95,6 @@ function updatePosition(state, instant = false) {
     }
 }
 
-// --- EFFETS VISUELS (Parallaxe Hero) ---
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroTitle = document.querySelector('.hero-title');
