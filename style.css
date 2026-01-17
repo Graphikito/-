@@ -1,25 +1,3 @@
-/* ==========================================================
-     STYLE GUIDE & DOCUMENTATION (débutants)
-
-     Contrat:
-     - Inputs: aucun (fichiers statiques). Les classes HTML suivantes
-         sont attendues dans `index.html` : .navbar, .hero-section,
-         .hero-image-box, .portfolio-item, .contact-section, etc.
-     - Outputs: règles visuelles et responsive appliquées au DOM.
-     - Erreurs communes: oublier de remplacer un placeholder par une image
-         ou placer une image avec un chemin incorrect.
-
-     Où personnaliser rapidement:
-     - Couleurs principales: recherchez les valeurs hex (ex: #d4a574) et
-         remplacez-les globalement.
-     - Polices: modifiez `font-family` dans `body`.
-     - Espacements: modifiez les `padding` des sections.
-
-     Astuce : avant d'éditer massivement, copiez ce fichier (ex: style.custom.css)
-     et faites vos tests dessus pour pouvoir revenir en arrière.
-     ========================================================== */
-
-/* Reset et styles de base */
 * {
         margin: 0;
         padding: 0;
@@ -380,26 +358,42 @@ body {
     color: #ff6b9d;
 }
 
+/* --- Correction de la Photo de Contact --- */
+
+
+
+/* On garde l'effet de bordure blanche interne */
+.contact-photo::before {
+    content: '';
+    position: absolute;
+    inset: 8px; /* Épaisseur de la bordure dorée */
+    background: white;
+    border-radius: 50%;
+    z-index: 1;
+}
+
 .contact-photo {
     width: 250px;
     height: 250px;
     border-radius: 50%;
     background: linear-gradient(135deg, #d4a574 0%, #b88a5c 100%);
-    box-shadow: 0 15px 60px rgba(212, 165, 116, 0.4);
     position: relative;
-    transition: all 0.4s ease;
+    overflow: hidden; /* Important pour garder la forme ronde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.contact-photo::before {
-    content: '';
-    position: absolute;
-    inset: 8px;
-    background: linear-gradient(135deg, #f5f0eb 0%, #ffffff 100%);
+.contact-photo img {
+    width: 92%; /* Laisse une petite bordure dorée visible */
+    height: 92%;
+    object-fit: cover;
     border-radius: 50%;
+    z-index: 2;
 }
 
 .contact-photo:hover {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.05) rotate(2deg);
     box-shadow: 0 20px 80px rgba(212, 165, 116, 0.5);
 }
 
@@ -473,18 +467,62 @@ body {
     transition: none;
 }
 
+
+/* --- Correction des images dans les Carrousels --- */
+
+/* --- Correction globale pour les images de Galerie --- */
 .gallery-item {
-    width: calc((100vw - 12rem) / 4);
+    width: calc((100vw - 12rem) / 4); /* Largeur dynamique */
     max-width: 350px;
-    aspect-ratio: 3/4;
+    aspect-ratio: 3 / 4; /* Garde une forme de portrait élégante */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
-    background: linear-gradient(135deg, #f5f0eb 0%, #ebe4dd 100%);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    background: #f5f0eb;
     position: relative;
 }
 
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit le cadre sans déformer */
+    object-position: center; /* Centre l'image pour éviter les cadrages bizarres */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* --- Correction pour la photo de Contact (Cercle) --- */
+.contact-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4a574 0%, #b88a5c 100%);
+    position: relative;
+    overflow: hidden; /* Important pour garder la forme ronde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-photo img {
+    width: 92%; /* Laisse une petite bordure dorée visible */
+    height: 92%;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Effet de zoom sur l'image au survol de la case */
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Supprimer ou commenter le debug (les numéros) si tu as des images partout */
+.gallery-item::after {
+    display: none;
+}
 /* Styles spécifiques pour chaque galerie */
 #mariage-gallery .gallery-item,
 #sport-gallery .gallery-item,
@@ -494,28 +532,8 @@ body {
     background-repeat: no-repeat;
 }
 
-/* Temporaire : numéros pour debug */
-.gallery-item::after {
-    content: attr(data-index);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: #666;
-    font-weight: bold;
-}
 
 
-.gallery-item::after {
-    content: attr(data-index);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: #666;
-}
 
 .gallery-item:hover {
     transform: scale(1.05);
@@ -612,5 +630,73 @@ body {
 
     .section-title {
         font-size: 2.5rem;
+    }
+}
+
+/* --- Style Prestations en Ligne --- */
+
+.prestation-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espace entre les cases */
+}
+
+.prestation-item-row {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 165, 116, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.prestation-item-row:hover {
+    transform: scale(1.02);
+    border-color: #d4a574;
+    box-shadow: 0 8px 25px rgba(212, 165, 116, 0.1);
+}
+
+.prestation-item-row.highlighted {
+    border-left: 5px solid #d4a574;
+}
+
+.p-title {
+    flex: 1;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c2c2c;
+}
+
+.p-desc {
+    flex: 2;
+    font-style: italic;
+    color: #6a6a6a;
+    font-size: 0.95rem;
+    padding: 0 20px;
+}
+
+.p-price {
+    flex: 0.5;
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #d4a574;
+    font-size: 1.5rem;
+}
+
+/* Responsive : On repasse en colonne sur mobile si besoin */
+@media (max-width: 768px) {
+    .prestation-item-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    .p-desc {
+        padding: 10px 0;
     }
 }
