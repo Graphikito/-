@@ -3,111 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestations - Photographie</title>
+    <title>Portfolio - Graphikito_</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">Graphikito_</div>
+        <div class="logo"><a href="index.html">Graphikito</a></div>
         <ul class="nav-links">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="prestations.html">Prestations</a></li>
+            <li><a href="prestations.html">Prestation</a></li>
             <li><a href="a_propos.html">À propos</a></li>
         </ul>
     </nav>
 
-    <header class="portfolio-header">
-        <h1 class="portfolio-main-title">Prestations</h1> <p class="portfolio-subtitle">
-            Chaque prestation est unique, un mariage ou un shooting portrait ne se déroule pas de la même façon et chaque mariage est unique.
-            <br><br>
-            Pour chaque prestation, vous verrez donc une tarification de base qui pourrait être modifiée selon les besoins.
-        </p>
-    </header>
-
-    <section class="portfolio-section">
-        <h2 class="section-title">Mariage</h2>
-        <div class="prestation-container">
-            <div class="prestation-item-row">
-                <span class="p-title">Couple</span>
-                <span class="p-desc">Shooting intime en costume</span>
-                <span class="p-price">250 €</span>
-            </div>
-            <div class="prestation-item-row">
-                <span class="p-title">Mairie</span>
-                <span class="p-desc">Solennel</span>
-                <span class="p-price">300 €</span>
-            </div>
-            <div class="prestation-item-row">
-                <span class="p-title">Soirée (4h)</span>
-                <span class="p-desc">Immortaliser, figer l'instant le plus beau</span>
-                <span class="p-price">500 €</span>
-            </div>
-            <div class="prestation-item-row highlighted">
-                <span class="p-title">Journée complète</span>
-                <span class="p-desc">L'ensemble des prestations précédentes</span>
-                <span class="p-price">1400 €</span>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #6a6a6a;">
-            Contactez moi pour plus d'information.
-        </p>
+    <!-- En-tête Portfolio -->
+    <section class="portfolio-header">
+        <h1 class="portfolio-main-title">Portfolio</h1>
+        <p class="portfolio-subtitle">Retrouvez ici l'exhaustivité de mes photos personnels et mes prestations</p>
     </section>
 
-    <section class="portfolio-section" style="background: rgba(212, 165, 116, 0.03);">
-        <h2 class="section-title">Sport</h2>
-        <div class="prestation-container">
-            <div class="prestation-item-row">
-                <span class="p-title">Match (2h)</span>
-                <span class="p-desc">Capture de l'action</span>
-                <span class="p-price">100 €</span>
+    <!-- Section Mariage -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Mariage</h2>
+        
+        <div class="gallery-container">
+            <button class="gallery-nav gallery-nav-left" onclick="scrollGallery('mariage', -1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            
+            <div class="gallery-wrapper" id="mariage-gallery">
+                <div class="gallery-track">
+                    <div class="gallery-item" data-index="1" style="background-color: #e8d5c5"><img src="/photos/mariage/Mariage1.jpg"></div>
+                    <div class="gallery-item" data-index="2" style="background-color: #d4b69b"><img src="/photos/mariage/Mariage2.jpg"></div>
+                    <div class="gallery-item" data-index="3" style="background-color: #c19c7c"><img src="/photos/mariage/Mariage3.jpeg"></div>
+                    <div class="gallery-item" data-index="4" style="background-color: #b88a5c"><img src="/photos/mariage/Mariage7.jpg"></div>
+                    <div class="gallery-item" data-index="5" style="background-color: #a67b4d"><img src="/photos/mariage/Mariage5.jpg"></div>
+                    <div class="gallery-item" data-index="6" style="background-color: #8f6a42"><img src="/photos/mariage/Mariage6.jpg"></div>
+                    <div class="gallery-item" data-index="7" style="background-color: #8f6a42"><img src="/photos/mariage/Mariage6.jpg"></div>
+
+
+                </div>
             </div>
-            <div class="prestation-item-row">
-                <span class="p-title">Évènement</span>
-                <span class="p-desc">Demi-journée</span>
-                <span class="p-price">300 €</span>
-            </div>
-            <div class="prestation-item-row">
-                <span class="p-title">Journée complète</span>
-                <span class="p-desc">Couverture intégrale</span>
-                <span class="p-price">800 €</span>
-            </div>
+            
+            <button class="gallery-nav gallery-nav-right" onclick="scrollGallery('mariage', 1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
     </section>
 
-    <section class="portfolio-section">
-        <h2 class="section-title">Portrait</h2>
-        <div class="prestation-container">
-            <div class="prestation-item-row">
-                <span class="p-title">3 photos</span>
-                <span class="p-desc">Séance courte</span>
-                <span class="p-price">10 €</span>
+    <!-- Section Sport -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Sport</h2>
+        
+        <div class="gallery-container">
+            <button class="gallery-nav gallery-nav-left" onclick="scrollGallery('sport', -1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            
+            <div class="gallery-wrapper" id="sport-gallery">
+                <div class="gallery-track">
+                    <div class="gallery-item" data-index="1" style="background-color: #e8d5c5"><img src="/photos/mariage/Mariage.jpg"></div>
+                    <div class="gallery-item" data-index="2" style="background-color: #d4b69b"><img src="/photos/mariage/Mariage1.jpg"></div>
+                    <div class="gallery-item" data-index="3" style="background-color: #c19c7c"><img src="/photos/mariage/Mariage2.jpg"></div>
+                    <div class="gallery-item" data-index="4" style="background-color: #b88a5c"><img src="/photos/mariage/Mariage3.jpeg"></div>
+                    <div class="gallery-item" data-index="5" style="background-color: #a67b4d"><img src="/photos/mariage/Mariage7.jpg"></div>
+                    <div class="gallery-item" data-index="6" style="background-color: #8f6a42"><img src="/photos/mariage/Mariage5.jpg"></div>
+                    <div class="gallery-item" data-index="7" style="background-color: #8f6a42"><img src="/photos/mariage/Mariage5.jpg"></div>
+
+                </div>
             </div>
-            <div class="prestation-item-row">
-                <span class="p-title">5 photos</span>
-                <span class="p-desc">Séance classique</span>
-                <span class="p-price">20 €</span>
-            </div>
-            <div class="prestation-item-row">
-                <span class="p-title">10 photos</span>
-                <span class="p-desc">Séance complète</span>
-                <span class="p-price">30 €</span>
-            </div>
-            <div class="prestation-item-row">
-                <span class="p-title">+ de 10 photos</span>
-                <span class="p-desc">Tarif par unité supplémentaire</span>
-                <span class="p-price">3 €/photo</span>
-            </div>
+            
+            <button class="gallery-nav gallery-nav-right" onclick="scrollGallery('sport', 1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
-        <p style="text-align: center; margin-top: 2rem; font-weight: bold; color: #d4a574;">
-            + 5 € / heures
-        </p>
     </section>
 
+    <!-- Section Portrait -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Portrait</h2>
+        
+        <div class="gallery-container">
+            <button class="gallery-nav gallery-nav-left" onclick="scrollGallery('portrait', -1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            
+            <div class="gallery-wrapper" id="portrait-gallery">
+                <div class="gallery-track">
+                    <div class="gallery-item" data-index="1" style="background-color: #d4a574"></div>
+                    <div class="gallery-item" data-index="2" style="background-color: #c99665"></div>
+                    <div class="gallery-item" data-index="3" style="background-color: #b88a5c"></div>
+                    <div class="gallery-item" data-index="4" style="background-color: #a67b4d"></div>
+                    <div class="gallery-item" data-index="5" style="background-color: #8f6a42"></div>
+                    <div class="gallery-item" data-index="6" style="background-color: #785839"></div>
+                </div>
+            </div>
+            
+            <button class="gallery-nav gallery-nav-right" onclick="scrollGallery('portrait', 1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Bas de page avec menu -->
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Contact</h2>
+        
+        <div class="contact-content">
+            <!-- Email -->
+            <div class="contact-item">
+                <p class="contact-label">Par mail</p>
+                <a href="mailto:Graphikito@icloud.com" class="contact-link">Graphikito@icloud.com</a>
+            </div>
+
+            <!-- Photo centrale -->
+            <div class="contact-photo"><img src="assets/logo.jpg"></div>
+
+            <!-- Instagram -->
+            <div class="contact-item">
+                <p class="contact-label">Instagram</p>
+                <a href="https://instagram.com/Graphikito_/" target="_blank" class="contact-link instagram-link">@Graphikito_</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-        &copy; 2026 Photographie - Tous droits réservés
+        <p>&copy; 2025 Graphiste - Tous droits réservés</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
